@@ -4,14 +4,42 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use App\Models\Category;
 use App\Models\Tag;
-use Illuminate\Http\Request;
+use App\Http\Requests\IndexContactRequest;
 
 class AdminController extends Controller
 {
-    public function index()
+    public function index(IndexContactRequest $request)
     {
-        $contacts = Contact::with(['category', 'tags'])
-            ->paginate(7);
+
+        $query = Contact::with(['category', 'tags']);
+        //検索フォーム
+        if ($request->filled('keyword')) {
+            $keyword = $request->keyword;
+
+            $query->where(function ($q) use ($keyword) {
+                $q->where('first_name', 'like', "%{$keyword}%")
+                    ->orWhere('last_name', 'like', "%{$keyword}%")
+                    ->orWhere('email', 'like', "%{$keyword}%");
+            });
+        }
+
+        // 性別が選択されていて、「全て（0）」ではない場合
+        if ($request->filled('gender') && $request->gender != 0) {
+            $query->where('gender', $request->gender);
+        }
+
+        // お問い合わせ種類が選択されている場合
+        if ($request->filled('category_id')) {
+            $query->where('category_id', $request->category_id);
+        }
+
+        // 日付が入力されている場合
+        if ($request->filled('date')) {
+            $query->whereDate('created_at', $request->date);
+        }
+
+        //検索結果を7件ずつ表示
+        $contacts = $query->paginate(7);
 
         $categories = Category::all();
         $tags = Tag::all();
