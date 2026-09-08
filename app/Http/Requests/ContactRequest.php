@@ -14,17 +14,25 @@ class ContactRequest extends FormRequest
         return true;
     }
 
-
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'tel' => $this->input('tel1')
+                . $this->input('tel2')
+                . $this->input('tel3'),
+        ]);
+    }
     public function rules(): array
     {
         return [
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'gender' => 'required|integer|in:1,2,3',
-            'email' => 'required|email',
+            'email' => 'required|string|email|max:255',
             'tel1' => 'required|numeric',
             'tel2' => 'required|numeric',
             'tel3' => 'required|numeric',
+            'tel' => ['required', 'string', 'regex:/^[0-9]{10,11}$/'],
             'address' => 'required|string|max:255',
             'building' => 'nullable|string|max:255',
             'category_id' => 'required|integer|exists:categories,id',
