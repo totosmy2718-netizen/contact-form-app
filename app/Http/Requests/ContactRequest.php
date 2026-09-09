@@ -18,10 +18,11 @@ class ContactRequest extends FormRequest
     {
         $this->merge([
             'tel' => $this->input('tel1')
-                . $this->input('tel2')
-                . $this->input('tel3'),
+                .$this->input('tel2')
+                .$this->input('tel3'),
         ]);
     }
+
     public function rules(): array
     {
         return [

@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Contact;
-use App\Models\Category;
-use App\Models\Tag;
+
 use App\Http\Requests\IndexContactRequest;
+use App\Models\Category;
+use App\Models\Contact;
+use App\Models\Tag;
 
 class AdminController extends Controller
 {
@@ -12,7 +13,7 @@ class AdminController extends Controller
     {
 
         $query = Contact::with(['category', 'tags']);
-        //検索フォーム
+        // 検索フォーム
         if ($request->filled('keyword')) {
             $keyword = $request->keyword;
 
@@ -38,7 +39,7 @@ class AdminController extends Controller
             $query->whereDate('created_at', $request->date);
         }
 
-        //検索結果を7件ずつ表示
+        // 検索結果を7件ずつ表示
         $contacts = $query->paginate(7);
 
         $categories = Category::all();

@@ -82,4 +82,38 @@ class ContactStoreTest extends TestCase
             'tag_id' => $tags[1]->id,
         ]);
     }
+
+    /** @test */
+    public function 入力内容に不備がある場合は保存されずエラーが返る(): void
+    {
+        // Arrange
+        $category = Category::factory()->create();
+
+        $data = [
+            'first_name' => '',
+            'last_name' => '太郎',
+            'gender' => 1,
+            'email' => 'test@example.com',
+            'tel1' => '090',
+            'tel2' => '1234',
+            'tel3' => '5678',
+            'address' => '東京都渋谷区',
+            'building' => '',
+            'category_id' => $category->id,
+            'detail' => 'お問い合わせ内容です。',
+        ];
+
+        // Act
+        $response = $this
+            ->from('/')
+            ->post('/contacts', $data);
+
+        // Assert
+        $response->assertRedirect('/');
+        $response->assertSessionHasErrors([
+            'first_name',
+        ]);
+
+        $this->assertDatabaseCount('contacts', 0);
+    }
 }

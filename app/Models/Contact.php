@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Contact extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'category_id',
         'first_name',

@@ -24,7 +24,7 @@ class IndexContactRequestTest extends TestCase
             'date' => '2026-09-08',
         ];
 
-        $request = new IndexContactRequest();
+        $request = new IndexContactRequest;
 
         $validator = Validator::make($data, $request->rules());
 
@@ -38,7 +38,7 @@ class IndexContactRequestTest extends TestCase
             'gender' => 4,
         ];
 
-        $request = new IndexContactRequest();
+        $request = new IndexContactRequest;
 
         $validator = Validator::make($data, $request->rules());
 
@@ -53,7 +53,7 @@ class IndexContactRequestTest extends TestCase
             'keyword' => str_repeat('あ', 255),
         ];
 
-        $request = new IndexContactRequest();
+        $request = new IndexContactRequest;
 
         $validator = Validator::make($data, $request->rules());
 
@@ -67,7 +67,7 @@ class IndexContactRequestTest extends TestCase
             'keyword' => str_repeat('あ', 256),
         ];
 
-        $request = new IndexContactRequest();
+        $request = new IndexContactRequest;
 
         $validator = Validator::make($data, $request->rules());
 
@@ -76,7 +76,7 @@ class IndexContactRequestTest extends TestCase
     }
 
     /** @test */
-    public function 存在するカテゴリーIDはバリデーションを通過する(): void
+    public function 存在するカテゴリー_i_dはバリデーションを通過する(): void
     {
         $category = Category::factory()->create();
 
@@ -84,7 +84,7 @@ class IndexContactRequestTest extends TestCase
             'category_id' => $category->id,
         ];
 
-        $request = new IndexContactRequest();
+        $request = new IndexContactRequest;
 
         $validator = Validator::make($data, $request->rules());
 
@@ -92,13 +92,13 @@ class IndexContactRequestTest extends TestCase
     }
 
     /** @test */
-    public function 存在しないカテゴリーIDだとバリデーションエラーになる(): void
+    public function 存在しないカテゴリー_i_dだとバリデーションエラーになる(): void
     {
         $data = [
             'category_id' => 99999,
         ];
 
-        $request = new IndexContactRequest();
+        $request = new IndexContactRequest;
 
         $validator = Validator::make($data, $request->rules());
 
@@ -113,7 +113,7 @@ class IndexContactRequestTest extends TestCase
             'date' => '2026-09-08',
         ];
 
-        $request = new IndexContactRequest();
+        $request = new IndexContactRequest;
 
         $validator = Validator::make($data, $request->rules());
 
@@ -127,7 +127,7 @@ class IndexContactRequestTest extends TestCase
             'date' => 'invalid-date',
         ];
 
-        $request = new IndexContactRequest();
+        $request = new IndexContactRequest;
 
         $validator = Validator::make($data, $request->rules());
 

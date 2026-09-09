@@ -35,7 +35,7 @@ class ContactRequestTest extends TestCase
             'detail' => 'お問い合わせ内容です。',
         ];
 
-        $request = new ContactRequest();
+        $request = new ContactRequest;
 
         $validator = Validator::make(
             $data,
@@ -53,7 +53,7 @@ class ContactRequestTest extends TestCase
             'tel' => '0312345678',
         ];
 
-        $request = new ContactRequest();
+        $request = new ContactRequest;
 
         $validator = Validator::make($data, [
             'tel' => $request->rules()['tel'],
@@ -69,7 +69,7 @@ class ContactRequestTest extends TestCase
             'tel' => '09012345678',
         ];
 
-        $request = new ContactRequest();
+        $request = new ContactRequest;
 
         $validator = Validator::make($data, [
             'tel' => $request->rules()['tel'],
@@ -85,7 +85,7 @@ class ContactRequestTest extends TestCase
             'tel' => '031234567',
         ];
 
-        $request = new ContactRequest();
+        $request = new ContactRequest;
 
         $validator = Validator::make($data, [
             'tel' => $request->rules()['tel'],
@@ -102,7 +102,7 @@ class ContactRequestTest extends TestCase
             'tel' => '090123456789',
         ];
 
-        $request = new ContactRequest();
+        $request = new ContactRequest;
 
         $validator = Validator::make($data, [
             'tel' => $request->rules()['tel'],
@@ -128,7 +128,7 @@ class ContactRequestTest extends TestCase
             'detail' => '',
         ];
 
-        $request = new ContactRequest();
+        $request = new ContactRequest;
 
         $validator = Validator::make(
             $data,
@@ -156,7 +156,7 @@ class ContactRequestTest extends TestCase
             'first_name' => str_repeat('あ', 255),
         ];
 
-        $request = new ContactRequest();
+        $request = new ContactRequest;
 
         $validator = Validator::make($data, [
             'first_name' => $request->rules()['first_name'],
@@ -172,7 +172,7 @@ class ContactRequestTest extends TestCase
             'first_name' => str_repeat('あ', 256),
         ];
 
-        $request = new ContactRequest();
+        $request = new ContactRequest;
 
         $validator = Validator::make($data, [
             'first_name' => $request->rules()['first_name'],
@@ -189,7 +189,7 @@ class ContactRequestTest extends TestCase
             'last_name' => str_repeat('あ', 255),
         ];
 
-        $request = new ContactRequest();
+        $request = new ContactRequest;
 
         $validator = Validator::make($data, [
             'last_name' => $request->rules()['last_name'],
@@ -205,7 +205,7 @@ class ContactRequestTest extends TestCase
             'last_name' => str_repeat('あ', 256),
         ];
 
-        $request = new ContactRequest();
+        $request = new ContactRequest;
 
         $validator = Validator::make($data, [
             'last_name' => $request->rules()['last_name'],
@@ -222,7 +222,7 @@ class ContactRequestTest extends TestCase
             'gender' => 4,
         ];
 
-        $request = new ContactRequest();
+        $request = new ContactRequest;
 
         $validator = Validator::make($data, [
             'gender' => $request->rules()['gender'],
@@ -239,7 +239,7 @@ class ContactRequestTest extends TestCase
             'email' => 'test',
         ];
 
-        $request = new ContactRequest();
+        $request = new ContactRequest;
 
         $validator = Validator::make($data, [
             'email' => $request->rules()['email'],
@@ -252,13 +252,13 @@ class ContactRequestTest extends TestCase
     /** @test */
     public function メールアドレスは255文字まで入力できる(): void
     {
-        $email = str_repeat('a', 243) . '@example.com';
+        $email = str_repeat('a', 243).'@example.com';
 
         $data = [
             'email' => $email,
         ];
 
-        $request = new ContactRequest();
+        $request = new ContactRequest;
 
         $validator = Validator::make($data, [
             'email' => $request->rules()['email'],
@@ -271,13 +271,13 @@ class ContactRequestTest extends TestCase
     /** @test */
     public function メールアドレスが256文字以上だとバリデーションエラーになる(): void
     {
-        $email = str_repeat('a', 244) . '@example.com';
+        $email = str_repeat('a', 244).'@example.com';
 
         $data = [
             'email' => $email,
         ];
 
-        $request = new ContactRequest();
+        $request = new ContactRequest;
 
         $validator = Validator::make($data, [
             'email' => $request->rules()['email'],
@@ -298,7 +298,7 @@ class ContactRequestTest extends TestCase
             'tel3' => '5678',
         ];
 
-        $request = new ContactRequest();
+        $request = new ContactRequest;
 
         // Act
         $validator = Validator::make($data, [
@@ -320,7 +320,7 @@ class ContactRequestTest extends TestCase
             'address' => str_repeat('あ', 255),
         ];
 
-        $request = new ContactRequest();
+        $request = new ContactRequest;
 
         // Act
         $validator = Validator::make($data, [
@@ -339,7 +339,7 @@ class ContactRequestTest extends TestCase
             'address' => str_repeat('あ', 256),
         ];
 
-        $request = new ContactRequest();
+        $request = new ContactRequest;
 
         // Act
         $validator = Validator::make($data, [
@@ -359,7 +359,7 @@ class ContactRequestTest extends TestCase
             'building' => str_repeat('あ', 255),
         ];
 
-        $request = new ContactRequest();
+        $request = new ContactRequest;
 
         // Act
         $validator = Validator::make($data, [
@@ -378,7 +378,7 @@ class ContactRequestTest extends TestCase
             'building' => str_repeat('あ', 256),
         ];
 
-        $request = new ContactRequest();
+        $request = new ContactRequest;
 
         // Act
         $validator = Validator::make($data, [
@@ -391,14 +391,14 @@ class ContactRequestTest extends TestCase
     }
 
     /** @test */
-    public function 存在しないカテゴリーIDだとバリデーションエラーになる(): void
+    public function 存在しないカテゴリー_i_dだとバリデーションエラーになる(): void
     {
         // Arrange
         $data = [
             'category_id' => 99999,
         ];
 
-        $request = new ContactRequest();
+        $request = new ContactRequest;
 
         // Act
         $validator = Validator::make($data, [
@@ -411,14 +411,14 @@ class ContactRequestTest extends TestCase
     }
 
     /** @test */
-    public function タグIDが配列でないとバリデーションエラーになる(): void
+    public function タグ_i_dが配列でないとバリデーションエラーになる(): void
     {
         // Arrange
         $data = [
             'tag_ids' => '1',
         ];
 
-        $request = new ContactRequest();
+        $request = new ContactRequest;
 
         // Act
         $validator = Validator::make($data, [
@@ -431,14 +431,14 @@ class ContactRequestTest extends TestCase
     }
 
     /** @test */
-    public function 存在しないタグIDだとバリデーションエラーになる(): void
+    public function 存在しないタグ_i_dだとバリデーションエラーになる(): void
     {
         // Arrange
         $data = [
             'tag_ids' => [99999],
         ];
 
-        $request = new ContactRequest();
+        $request = new ContactRequest;
 
         // Act
         $validator = Validator::make($data, [
@@ -459,7 +459,7 @@ class ContactRequestTest extends TestCase
             'detail' => str_repeat('あ', 120),
         ];
 
-        $request = new ContactRequest();
+        $request = new ContactRequest;
 
         // Act
         $validator = Validator::make($data, [
@@ -478,7 +478,7 @@ class ContactRequestTest extends TestCase
             'detail' => str_repeat('あ', 121),
         ];
 
-        $request = new ContactRequest();
+        $request = new ContactRequest;
 
         // Act
         $validator = Validator::make($data, [

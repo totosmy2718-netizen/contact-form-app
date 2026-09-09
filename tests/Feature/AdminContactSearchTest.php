@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Category;
 use App\Models\Contact;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -66,8 +67,8 @@ class AdminContactSearchTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $category1 = \App\Models\Category::factory()->create();
-        $category2 = \App\Models\Category::factory()->create();
+        $category1 = Category::factory()->create();
+        $category2 = Category::factory()->create();
 
         Contact::factory()->create([
             'first_name' => '山田',
@@ -81,7 +82,7 @@ class AdminContactSearchTest extends TestCase
 
         $response = $this
             ->actingAs($user)
-            ->get('/admin?category_id=' . $category1->id);
+            ->get('/admin?category_id='.$category1->id);
 
         $response->assertStatus(200);
         $response->assertSee('山田');

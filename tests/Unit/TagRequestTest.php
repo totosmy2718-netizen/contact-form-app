@@ -19,7 +19,7 @@ class TagRequestTest extends TestCase
             'name' => '質問',
         ];
 
-        $request = new TagRequest();
+        $request = new TagRequest;
 
         $validator = Validator::make(
             $data,
@@ -37,7 +37,7 @@ class TagRequestTest extends TestCase
             'name' => '',
         ];
 
-        $request = new TagRequest();
+        $request = new TagRequest;
 
         $validator = Validator::make(
             $data,
@@ -56,7 +56,7 @@ class TagRequestTest extends TestCase
             'name' => str_repeat('あ', 50),
         ];
 
-        $request = new TagRequest();
+        $request = new TagRequest;
 
         $validator = Validator::make(
             $data,
@@ -74,7 +74,7 @@ class TagRequestTest extends TestCase
             'name' => str_repeat('あ', 51),
         ];
 
-        $request = new TagRequest();
+        $request = new TagRequest;
 
         $validator = Validator::make(
             $data,
@@ -97,7 +97,7 @@ class TagRequestTest extends TestCase
             'name' => '質問',
         ];
 
-        $request = new TagRequest();
+        $request = new TagRequest;
 
         $validator = Validator::make(
             $data,
@@ -120,13 +120,12 @@ class TagRequestTest extends TestCase
             'name' => '質問',
         ];
 
-        $request = new TagRequest();
+        $request = new TagRequest;
 
         $request->setRouteResolver(function () use ($tag) {
-            return new class ($tag) {
-                public function __construct(private Tag $tag)
-                {
-                }
+            return new class($tag)
+            {
+                public function __construct(private Tag $tag) {}
 
                 public function parameter($key, $default = null)
                 {
@@ -159,13 +158,12 @@ class TagRequestTest extends TestCase
             'name' => '要望',
         ];
 
-        $request = new TagRequest();
+        $request = new TagRequest;
 
         $request->setRouteResolver(function () use ($tag) {
-            return new class ($tag) {
-                public function __construct(private Tag $tag)
-                {
-                }
+            return new class($tag)
+            {
+                public function __construct(private Tag $tag) {}
 
                 public function parameter($key, $default = null)
                 {
@@ -183,5 +181,4 @@ class TagRequestTest extends TestCase
         $this->assertTrue($validator->fails());
         $this->assertTrue($validator->errors()->has('name'));
     }
-
 }
