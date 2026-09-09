@@ -1,66 +1,243 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# COACHTECH お問い合わせフォームアプリ
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+お問い合わせの入力・確認・送信を行うWebアプリケーションです。
+管理者はログイン後、お問い合わせの一覧表示・検索・詳細確認・削除や、
+タグの登録・編集・削除を行うことができます。
 
-## About Laravel
+Unit Test・Feature Testを実装し、テストカバレッジ70%以上を確認しています。
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 作成者
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+志賀 由美子
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 使用技術
 
-## Learning Laravel
+- PHP 8.5.6
+- Laravel 10.50.3
+- Laravel Fortify 1.36.2
+- MySQL 8.4.11
+- Laravel Sail 1.67.0
+- Tailwind CSS 3.4.19
+- Vite 5.4.21
+- Alpine.js 3
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## ER図
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+```mermaid
+erDiagram
+    users {
+        bigint id PK
+        varchar name
+        varchar email UK
+        timestamp email_verified_at
+        varchar password
+        varchar remember_token
+        timestamp created_at
+        timestamp updated_at
+    }
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+    categories {
+        bigint id PK
+        varchar content
+        timestamp created_at
+        timestamp updated_at
+    }
 
-## Laravel Sponsors
+    contacts {
+        bigint id PK
+        bigint category_id FK
+        varchar first_name
+        varchar last_name
+        tinyint gender
+        varchar email
+        varchar tel
+        varchar address
+        varchar building
+        varchar detail
+        timestamp created_at
+        timestamp updated_at
+    }
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+    tags {
+        bigint id PK
+        varchar name UK
+        timestamp created_at
+        timestamp updated_at
+    }
 
-### Premium Partners
+    contact_tag {
+        bigint id PK
+        bigint contact_id FK
+        bigint tag_id FK
+        timestamp created_at
+        timestamp updated_at
+    }
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+    categories ||--o{ contacts : "has many"
+    contacts ||--o{ contact_tag : "has many"
+    tags ||--o{ contact_tag : "has many"
+```
 
-## Contributing
+## 開発環境URL
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+http://localhost
 
-## Code of Conduct
+管理画面：http://localhost/admin
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+phpMyAdmin：http://localhost:8080
 
-## Security Vulnerabilities
+## 動作環境
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+DockerおよびLaravel Sailを使用した開発環境で動作します。
 
-## License
+WebアプリケーションはLaravelで構築し、データベースにはMySQLを使用しています。
+フロントエンドのビルドにはViteを使用しています。
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 環境構築手順
+
+1. **リポジトリをクローン**
+
+```bash
+$ git clone https://github.com/totosmy2718-netizen/contact-form-app.git
+$ cd contact-form-app
+```
+
+2. **.envファイルの準備**
+
+`.env.example`をコピーして`.env`を作成します。
+
+```bash
+$ cp .env.example .env
+```
+
+3. **Composer依存パッケージのインストール**
+
+```bash
+$ docker run --rm \
+  -u "$(id -u):$(id -g)" \
+  -v "$(pwd):/var/www/html" \
+  -w /var/www/html \
+  -e COMPOSER_CACHE_DIR=/tmp/composer_cache \
+  laravelsail/php82-composer:latest \
+  composer install --ignore-platform-reqs
+```
+
+4. **Laravel Sailの起動**
+
+```bash
+$ ./vendor/bin/sail up -d
+```
+
+5. **アプリケーションキーの生成**
+
+```bash
+$ ./vendor/bin/sail artisan key:generate
+```
+
+6. **データベースのマイグレーションと初期データ投入**
+
+```bash
+$ ./vendor/bin/sail artisan migrate --seed
+```
+
+Seederにより、カテゴリ・タグ・テストユーザー・お問い合わせの初期データが登録されます。
+
+管理画面の動作確認には以下のテストユーザーを使用できます。
+
+```text
+メールアドレス：test@example.com
+パスワード：password
+```
+
+7. **フロントエンドのビルド**
+
+依存パッケージをインストールします。
+
+```bash
+$ ./vendor/bin/sail npm install
+```
+
+開発環境でViteを起動します。（起動したままにしておく）
+
+```bash
+$ ./vendor/bin/sail npm run dev
+```
+
+8. **アプリケーションへのアクセス**
+
+ブラウザで以下にアクセスします。
+
+```text
+http://localhost
+```
+
+管理画面：
+
+```text
+http://localhost/admin
+```
+
+phpMyAdmin：
+
+```text
+http://localhost:8080
+```
+
+## テスト実行
+
+Unit TestおよびFeature Testを実装しています。
+
+すべてのテストを実行する場合：
+
+```bash
+$ ./vendor/bin/sail artisan test
+```
+
+Unit Testのみ実行する場合：
+
+```bash
+$ ./vendor/bin/sail artisan test tests/Unit
+```
+
+Feature Testのみ実行する場合：
+
+```bash
+$ ./vendor/bin/sail artisan test tests/Feature
+```
+
+テストカバレッジを確認する場合：
+
+```bash
+$ ./vendor/bin/sail artisan test --coverage
+```
+
+テストカバレッジは **72.8%** で、要件の70%以上を満たしています。
+
+## 機能一覧
+
+- お問い合わせフォーム入力
+- お問い合わせ内容の確認
+- お問い合わせ送信
+- お問い合わせ完了画面
+- カテゴリ選択
+- タグの複数選択
+- ユーザー新規登録
+- ログイン・ログアウト
+- 管理画面への認証制御
+- お問い合わせ一覧表示
+- キーワード検索
+- 性別検索
+- カテゴリ検索
+- 日付検索
+- お問い合わせ一覧のページネーション
+- お問い合わせ詳細表示
+- お問い合わせ削除
+- タグ登録
+- タグ編集
+- タグ削除
+- Unit Test
+- Feature Test
+
+## APIエンドポイント一覧
+
+API機能は応用要件のため、現在は未実装です。
