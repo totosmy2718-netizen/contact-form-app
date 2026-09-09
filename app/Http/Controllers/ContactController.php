@@ -1,12 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Http\Requests\ContactRequest;
 use App\Models\Category;
-use App\Models\Tag;
 use App\Models\Contact;
-
-use Illuminate\Http\Request;
+use App\Models\Tag;
 
 class ContactController extends Controller
 {
@@ -14,6 +13,7 @@ class ContactController extends Controller
     {
         $categories = Category::all();
         $tags = Tag::all();
+
         return view('contact.index', compact('categories', 'tags'));
     }
 
@@ -22,8 +22,8 @@ class ContactController extends Controller
         $validated = $request->validated();
 
         $validated['tel'] =
-            $validated['tel1'] .
-            $validated['tel2'] .
+            $validated['tel1'].
+            $validated['tel2'].
             $validated['tel3'];
         $category = Category::find($validated['category_id']);
 
@@ -48,7 +48,7 @@ class ContactController extends Controller
             'last_name' => $validated['last_name'],
             'gender' => $validated['gender'],
             'email' => $validated['email'],
-            'tel' => $validated['tel1'] . $validated['tel2'] . $validated['tel3'],
+            'tel' => $validated['tel1'].$validated['tel2'].$validated['tel3'],
             'address' => $validated['address'],
             'building' => $validated['building'],
             'detail' => $validated['detail'],

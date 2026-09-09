@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use App\Models\Category;
+use Illuminate\Database\Seeder;
 
 class CategorySeeder extends Seeder
 {
@@ -13,7 +12,7 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        //固定データの登録
+        // 固定データの登録
         $categories = [
             '商品のお届けについて',
             '商品の交換について',

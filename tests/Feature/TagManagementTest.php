@@ -40,7 +40,7 @@ class TagManagementTest extends TestCase
 
         $response = $this
             ->actingAs($user)
-            ->get('/admin/tags/' . $tag->id . '/edit');
+            ->get('/admin/tags/'.$tag->id.'/edit');
 
         $response->assertStatus(200);
         $response->assertSee('質問');
@@ -57,7 +57,7 @@ class TagManagementTest extends TestCase
 
         $response = $this
             ->actingAs($user)
-            ->put('/admin/tags/' . $tag->id, [
+            ->put('/admin/tags/'.$tag->id, [
                 'name' => '重要',
             ]);
 
@@ -80,7 +80,7 @@ class TagManagementTest extends TestCase
 
         $response = $this
             ->actingAs($user)
-            ->delete('/admin/tags/' . $tag->id);
+            ->delete('/admin/tags/'.$tag->id);
 
         $response->assertRedirect('/admin');
 
@@ -110,7 +110,7 @@ class TagManagementTest extends TestCase
             'name' => '質問',
         ]);
 
-        $response = $this->put('/admin/tags/' . $tag->id, [
+        $response = $this->put('/admin/tags/'.$tag->id, [
             'name' => '重要',
         ]);
 
@@ -129,7 +129,7 @@ class TagManagementTest extends TestCase
             'name' => '質問',
         ]);
 
-        $response = $this->delete('/admin/tags/' . $tag->id);
+        $response = $this->delete('/admin/tags/'.$tag->id);
 
         $response->assertRedirect('/login');
 

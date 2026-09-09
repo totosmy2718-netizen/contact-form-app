@@ -42,7 +42,7 @@ class AdminContactTest extends TestCase
 
         $response = $this
             ->actingAs($user)
-            ->get('/admin/contacts/' . $contact->id);
+            ->get('/admin/contacts/'.$contact->id);
 
         $response->assertStatus(200);
 
@@ -66,7 +66,7 @@ class AdminContactTest extends TestCase
 
         $response = $this
             ->actingAs($user)
-            ->delete('/admin/contacts/' . $contact->id);
+            ->delete('/admin/contacts/'.$contact->id);
 
         $response->assertRedirect('/admin');
 
@@ -80,7 +80,7 @@ class AdminContactTest extends TestCase
     {
         $contact = Contact::factory()->create();
 
-        $response = $this->get('/admin/contacts/' . $contact->id);
+        $response = $this->get('/admin/contacts/'.$contact->id);
 
         $response->assertRedirect('/login');
     }
@@ -90,7 +90,7 @@ class AdminContactTest extends TestCase
     {
         $contact = Contact::factory()->create();
 
-        $response = $this->delete('/admin/contacts/' . $contact->id);
+        $response = $this->delete('/admin/contacts/'.$contact->id);
 
         $response->assertRedirect('/login');
 

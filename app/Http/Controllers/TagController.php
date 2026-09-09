@@ -1,10 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Tag;
-use App\Http\Requests\TagRequest;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\TagRequest;
+use App\Models\Tag;
 
 class TagController extends Controller
 {
@@ -35,10 +34,10 @@ class TagController extends Controller
         return view('admin.tags.edit', compact('tag'));
     }
 
-
     public function destroy(Tag $tag)
     {
         $tag->delete();
+
         return redirect('/admin');
     }
 }

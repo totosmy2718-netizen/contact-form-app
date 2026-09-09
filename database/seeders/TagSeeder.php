@@ -2,15 +2,14 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use App\Models\Tag;
+use Illuminate\Database\Seeder;
 
 class TagSeeder extends Seeder
 {
     public function run(): void
     {
-        //固定データの登録
+        // 固定データの登録
         $tags = [
             '質問',
             '要望',
@@ -25,5 +24,4 @@ class TagSeeder extends Seeder
             ]);
         }
     }
-
 }

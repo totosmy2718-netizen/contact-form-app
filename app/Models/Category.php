@@ -9,9 +9,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Category extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'content',
     ];
+
     /**
      * このカテゴリーに属する問い合わせを取得
      */
@@ -20,5 +22,3 @@ class Category extends Model
         return $this->hasMany(Contact::class);
     }
 }
-
-
