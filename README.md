@@ -211,7 +211,7 @@ $ ./vendor/bin/sail artisan test tests/Feature
 $ ./vendor/bin/sail artisan test --coverage
 ```
 
-テストカバレッジは **72.8%** で、要件の70%以上を満たしています。
+テストカバレッジは **83.1%** で、要件の70%以上を満たしています。
 
 ## 機能一覧
 
@@ -240,4 +240,23 @@ $ ./vendor/bin/sail artisan test --coverage
 
 ## APIエンドポイント一覧
 
-API機能は応用要件のため、現在は未実装です。
+公開APIとして、お問い合わせの取得・登録・更新・削除を実装しています。
+
+| メソッド | エンドポイント               | 内容                                         |
+| -------- | ---------------------------- | -------------------------------------------- |
+| GET      | `/api/v1/contacts`           | お問い合わせ一覧取得・検索・ページネーション |
+| GET      | `/api/v1/contacts/{contact}` | お問い合わせ詳細取得                         |
+| POST     | `/api/v1/contacts`           | お問い合わせ登録                             |
+| PUT      | `/api/v1/contacts/{contact}` | お問い合わせ更新                             |
+| DELETE   | `/api/v1/contacts/{contact}` | お問い合わせ削除                             |
+
+一覧取得では、以下の検索条件を指定できます。
+
+- `keyword`
+- `gender`
+- `category_id`
+- `date`
+- `per_page`
+- `page`
+
+APIは認証不要の公開APIです。
