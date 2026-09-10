@@ -31,8 +31,8 @@ class StoreContactRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'first_name.required' => 'お名前を入力してください',
-            'last_name.required' => 'お名前を入力してください',
+            'first_name.required' => '姓を入力してください',
+            'last_name.required' => '名を入力してください',
             'gender.required' => '性別を選択してください',
             'gender.in' => '性別の値が不正です',
             'email.required' => 'メールアドレスを入力してください',

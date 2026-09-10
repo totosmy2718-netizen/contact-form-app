@@ -61,8 +61,7 @@ class ContactRequest extends FormRequest
             'gender.in' => '性別を正しく選択してください',
 
             'email.required' => 'メールアドレスを入力してください',
-            'email.email' => 'メールアドレスの形式で入力してください',
-
+            'email.email' => 'メールアドレスはメール形式で入力してください',
             'tel1.required' => '電話番号を入力してください',
             'tel2.required' => '電話番号を入力してください',
             'tel3.required' => '電話番号を入力してください',

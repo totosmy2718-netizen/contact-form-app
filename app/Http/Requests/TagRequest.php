@@ -33,7 +33,7 @@ class TagRequest extends FormRequest
             'name.required' => 'タグ名を入力してください',
             'name.string' => 'タグ名は文字列で入力してください',
             'name.max' => 'タグ名は50文字以内で入力してください',
-            'name.unique' => 'このタグ名はすでに登録されています',
+            'name.unique' => 'そのタグ名は既に使用されています',
         ];
     }
 }

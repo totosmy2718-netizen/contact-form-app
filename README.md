@@ -237,6 +237,7 @@ $ ./vendor/bin/sail artisan test --coverage
 - タグ削除
 - Unit Test
 - Feature Test
+- CSVエクスポート
 
 ## APIエンドポイント一覧
 
