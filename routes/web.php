@@ -16,6 +16,9 @@ Route::get('/thanks', [ContactController::class, 'thanks']);
 Route::middleware('auth')->group(function () {
     Route::get('/admin', [AdminController::class, 'index']);
 
+    // CSVエクスポート
+    Route::get('/contacts/export', [ContactController::class, 'export']);
+
     // お問い合わせ詳細画面
     Route::get('/admin/contacts/{contact}', [AdminController::class, 'show']);
 
